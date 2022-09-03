@@ -1,12 +1,36 @@
-Test
+[root@ip-172-31-10-148 example-voting-app]# kubectl get all
+NAME                          READY   STATUS    RESTARTS   AGE
+pod/db-b54cd94f4-qppxs        1/1     Running   0          2d10h
+pod/kubia-59d857b444-hbc7m    1/1     Running   0          2d11h
+pod/kubia-59d857b444-mg4kc    1/1     Running   0          2d11h
+pod/kubia-59d857b444-wvnk4    1/1     Running   0          2d11h
+pod/redis-868d64d78-l7jlw     1/1     Running   0          2d10h
+pod/result-5d57b59f4b-bx8px   1/1     Running   0          2d10h
+pod/vote-94849dc97-6r78r      1/1     Running   0          2d10h
+pod/worker-dd46d7584-nk85c    1/1     Running   0          2d10h
 
-AME                      READY   STATUS    RESTARTS   AGE
-db-b54cd94f4-qppxs        1/1     Running   0          16m
-kubia-59d857b444-hbc7m    1/1     Running   0          40m
-kubia-59d857b444-mg4kc    1/1     Running   0          40m
-kubia-59d857b444-wvnk4    1/1     Running   0          40m
-redis-868d64d78-l7jlw     1/1     Running   0          16m
-result-5d57b59f4b-bx8px   1/1     Running   0          16m
-vote-94849dc97-6r78r      1/1     Running   0          16m
-worker-dd46d7584-nk85c    1/1     Running   0          16m
-[root@ip-172-31-10-148 k8s-specifications]# 
+NAME                 TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
+service/db           ClusterIP   10.109.140.122   <none>        5432/TCP         2d10h
+service/kubernetes   ClusterIP   10.96.0.1        <none>        443/TCP          2d12h
+service/kubia        ClusterIP   10.101.127.144   <none>        80/TCP           2d12h
+service/redis        ClusterIP   10.104.82.161    <none>        6379/TCP         2d10h
+service/result       NodePort    10.109.131.35    <none>        5001:31001/TCP   2d10h
+service/vote         NodePort    10.99.159.137    <none>        5000:31000/TCP   2d10h
+
+NAME                     READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/db       1/1     1            1           2d10h
+deployment.apps/kubia    3/3     3            3           2d12h
+deployment.apps/redis    1/1     1            1           2d10h
+deployment.apps/result   1/1     1            1           2d10h
+deployment.apps/vote     1/1     1            1           2d10h
+deployment.apps/worker   1/1     1            1           2d10h
+
+NAME                                DESIRED   CURRENT   READY   AGE
+replicaset.apps/db-b54cd94f4        1         1         1       2d10h
+replicaset.apps/kubia-59d857b444    3         3         3       2d12h
+replicaset.apps/kubia-79b84b44f4    0         0         0       2d11h
+replicaset.apps/kubia-7d5c456ffc    0         0         0       2d11h
+replicaset.apps/redis-868d64d78     1         1         1       2d10h
+replicaset.apps/result-5d57b59f4b   1         1         1       2d10h
+replicaset.apps/vote-94849dc97      1         1         1       2d10h
+replicaset.apps/worker-dd46d7584    1         1         1       2d10h
