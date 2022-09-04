@@ -1,0 +1,15 @@
+1) A Service in Kubernetes is a REST object, similar to a Pod. Like all of the REST objects, you can POST a Service definition to the API server to create a new instance.
+2) A Kubernetes Service is a resource you create to make a single, constant point of entry to a group of pods providing the same service. Each service has an IP address 
+and port that never change while the service exists
+3) Clients can open connections to that IP and port, and those connections are then routed to one of the pods backing that service.
+4) This way, clients of a service don’t need to know the location of individual pods providing the service, allowing those pods to be moved around the cluster at any time.
+5) The kube-proxy agent on the nodes watches the Kubernetes API for new services and endpoints
+6) After creation, it opens random ports and listens for traffic to the clusterIP port and next redirects traffic to the randomly generated service endpoints
+7) There are different Service Types available which you can choose from as per your environment:-
+ i) ClusterIP: It is the default type, but it provides internal access only.
+ ii) NodePort: which allocates a specific node port which needs to be opened on the firewall. That means that by using these node ports, external users, as long as they can
+    reach out to the nodes' IP addresses, are capable of reaching out to the Service.
+ iii) LoadBalancer: currently only implemented in public cloud. So if you're on Kubernetes in Azure or AWS, you will find a load balancer.
+ iv) ExternalName: which is a relatively new object that works on DNS names and redirection is happening at the DNS level.
+ v) Service without selector: which is used for direct connections based on IP port combinations without an endpoint. And this is useful for connections to a database or
+   between namespaces.
