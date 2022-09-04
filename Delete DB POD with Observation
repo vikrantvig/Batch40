@@ -1,0 +1,30 @@
+[root@ip-172-31-10-148 k8s-specifications]# kubectl get all
+NAME                          READY   STATUS    RESTARTS   AGE
+pod/db-b54cd94f4-mjd5h        1/1     Running   0          56s
+pod/kubia-59d857b444-hbc7m    1/1     Running   0          2d11h
+pod/kubia-59d857b444-mg4kc    1/1     Running   0          2d11h
+pod/kubia-59d857b444-xptfw    1/1     Running   0          23m
+pod/redis-868d64d78-l7jlw     1/1     Running   0          2d11h
+pod/result-5d57b59f4b-wrq67   1/1     Running   0          6m36s
+pod/vote-94849dc97-68vrm      1/1     Running   0          13m
+pod/worker-dd46d7584-hfn5m    1/1     Running   1          5m39s
+
+
+[root@ip-172-31-10-148 k8s-specifications]# kubectl delete pod/db-b54cd94f4-mjd5h
+pod "db-b54cd94f4-mjd5h" deleted
+^C
+
+
+*************RESULT & OBSERVATION*****************************************
+
+Result page got reset, total no of votes reset happened 
+
+POD looses data on deleting the DB Pod
+
+WHY result app STOPPED working after db pod stop
+Answer:- Since DB POD is deleted thats why DB socket connection from Application to DB is not available hence data is not available
+
+WHY result app STOPPED working after db pod stop?
+Answer:- Since DB pod is created and APP was still connected to previoud DB Socket, so we need to restart that App POD(result app PDO) to reconnect to DB. Post 
+restart it starts working but data previously stroed in DB is lost sicne DB pod is recreated and data is lost
+
