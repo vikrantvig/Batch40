@@ -1,0 +1,8 @@
+A ReplicaSet (RS) is a Kubernetes object that ensures there is always a stable set of running pods for a specific workload. The ReplicaSet configuration defines a 
+number of identical pods required, and if a pod is evicted or fails, creates more pods to compensate for the loss.
+
+It’s a new generation of ReplicationController and replaces it completely.
+You usually won’t create them directly, but instead have them created automatically when you create Deployment resource.
+A ReplicaSet behaves exactly like a ReplicationController, but it has more expressive pod selectors. 
+Whereas a ReplicationController’s label selector only allows matching pods that include a certain label, a ReplicaSet’s selector also allows matching pods that lack a
+certain label or pods that include a certain label key, regardless of its value.
